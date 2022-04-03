@@ -16,17 +16,11 @@
 
 COMMON_PATH := device/xiaomi/mt6768-common
 
-# Installs gsi keys into ramdisk, to boot a GSI with verified boot.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
-
-# Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+# Include Dev GSI Keys
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/xiaomi/mt6768-ims/mt6768-ims-vendor.mk)
-
-# APEX
-OVERRIDE_PRODUCT_COMPRESSED_APEX := false
 
 # APNs
 PRODUCT_COPY_FILES += \
@@ -40,7 +34,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@6.0-impl \
     android.hardware.audio@6.0-util.vendor \
     android.hardware.audio.common@6.0-util \
-    android.hardware.bluetooth.audio@2.0-impl \
+    android.hardware.bluetooth.audio@2.1-impl \
     audio.a2dp.default \
     audio.bluetooth.default \
     audio.r_submix.default \
@@ -79,7 +73,6 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    libldacBT_dec \
     libbtconfigstore \
     libbluetooth_audio_session.vendor \
     android.hardware.bluetooth@1.0.vendor \
